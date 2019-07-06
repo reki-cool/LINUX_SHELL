@@ -59,14 +59,14 @@ if __name__ == "__main__":
         # 写入内容
         starter_content = '\n'.join([
             r'#!/bin/bash',
-            r'work_path =$(dirname $(readlink -f $0))',
+            r'work_path=$(dirname $(readlink -f $0))',
             r'screen -dmS ' + link_name + ' ${work_path}/' + app_name
         ])
         write_file(starter_sh, starter_content)
         # 授权
         chmod777(starter_sh)
         # 创建软链接
-
+        os.symlink(starter_sh, os.path.join(link_dir, link_name))
 
         # 创建link_name+'killer.sh'的文件在app_dir路径下面
         killer_sh = os.path.join(app_dir, link_name + 'killer.sh')
@@ -80,5 +80,6 @@ if __name__ == "__main__":
         # 授权
         chmod777(killer_sh)
         # 创建软链接
+        os.symlink(killer_sh, os.path.join(link_dir, link_name + 'killer'))
     else:
         print('[执行失败]>>>请以root用户执行当前脚本')
