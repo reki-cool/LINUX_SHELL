@@ -22,7 +22,11 @@ import getopt
     路径拼接参考：https://blog.csdn.net/qq_42034590/article/details/80031241
     两种引号都有的情况参考：https://blog.csdn.net/linshenwei1995/article/details/78987444
     python获取命令行输入参数列表参考：https://blog.csdn.net/Lv_Victor/article/details/70699497
+脚本执行参考：
+    python3 ./quick_access_helper_for_AppImage.py -L /usr/local/bin -A /home/duyanhan/soft_app -a electron-ssr-0.2.6.AppImage -l myssr
 """
+
+
 
 # 软链接存放的文件夹路径
 link_dir = ''
@@ -63,7 +67,7 @@ if __name__ == "__main__":
     # 获取当前用户
     user = getpass.getuser()
     if user == 'root':
-        if len(args) != 4:
+        if len(opts) != 4:
             link_dir_temp = input('请输入目标可执行程序路径[例如/usr/local/bin]：')
             app_dir = input('请输入AppImage存放位置[例如/home/duyanhan/soft_app]：')
             app_name = input('请输入AppImage的名称[例如test.AppImage]：')
@@ -95,5 +99,7 @@ if __name__ == "__main__":
         chmod777(killer_sh)
         # 创建软链接
         os.symlink(killer_sh, os.path.join(link_dir, link_name + 'killer'))
+
+        print('全部创建完成...')
     else:
         print('[执行失败]>>>请以root用户执行当前脚本')
