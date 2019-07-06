@@ -8,8 +8,8 @@ import getpass
 # 要添加的DNS：用于下载github文件的dns，来源于：https://www.ipaddress.com/
 HOST_GITHUB = ["#GITHUB",
                "192.30.253.113    github.com",
-               "151.101.185.194   github.global.ssl.fastly.net",
-               "192.30.253.120    codeload.github.com"]
+               "151.101.25.194   github.global.ssl.fastly.net",
+               "192.30.253.121    codeload.github.com"]
 
 
 # 在host中搜索内容
@@ -69,7 +69,7 @@ if __name__ == "__main__":
 
     if user == 'root':
         # 修改hosts文件权限
-        chmod777(host_path)
+        # chmod777(host_path)
 
         if search_host(HOST_GITHUB, host_path):
             print("HOSTS文件中GITHUB相关的DNS记录已经存在...")
@@ -77,15 +77,23 @@ if __name__ == "__main__":
             write_host(HOST_GITHUB, host_path)
             print('已经成功向HOSTS文件中写入GITHUB相关的DNS记录...')
 
+        # 查看HOSTS文件中当前的DNS记录
+        # show_host(host_path)
+
         # 如果需要移除之前添加的DNS记录，取消下面两行注释
         # remove_host(HOST_GITHUB, host_path)
         # print('已经成功从HOSTS文件中删除GITHUB相关的DNS记录...')
 
         # 查看HOSTS文件中当前的DNS记录
-        # show_host(host_path)
+        show_host(host_path)
 
         # 恢复hosts文件权限
-        chmod644(host_path)
+        # chmod644(host_path)
 
     else:
         print('[执行失败]>>>请以root用户执行当前脚本')
+
+
+'''
+补充说明：事实证明，使用root权限执行时，可以不需要修改文件权限
+'''

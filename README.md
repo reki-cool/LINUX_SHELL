@@ -8,3 +8,4 @@
 #### 补充：
 如果没有生效，还需要重启一下网络  
 ```sudo /etc/init.d/networking restart```
+如果还是不行，需要通过代理解决
