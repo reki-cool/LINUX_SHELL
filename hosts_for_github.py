@@ -6,7 +6,7 @@ import stat
 import getpass
 
 # 要添加的DNS：用于下载github文件的dns，来源于：https://www.ipaddress.com/
-HOST_GITHUB = ["#GITHUB1",
+HOST_GITHUB = ["#GITHUB",
                "192.30.253.113    github.com",
                "151.101.185.194   github.global.ssl.fastly.net",
                "192.30.253.120    codeload.github.com"]
