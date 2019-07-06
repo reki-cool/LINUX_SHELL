@@ -4,6 +4,7 @@ import sys
 import os
 import stat
 import getpass
+import getopt
 
 """
 脚本目标：
@@ -20,16 +21,17 @@ import getpass
     创建软链接参考：https://www.runoob.com/python/os-symlink.html
     路径拼接参考：https://blog.csdn.net/qq_42034590/article/details/80031241
     两种引号都有的情况参考：https://blog.csdn.net/linshenwei1995/article/details/78987444
+    python获取命令行输入参数列表参考：https://blog.csdn.net/Lv_Victor/article/details/70699497
 """
 
 # 软链接存放的文件夹路径
-link_dir = r'/usr/local/bin'
+link_dir = ''
 # 当前AppImage文件存放的文件夹路径
-app_dir = r'/home/duyanhan/soft_app'
+app_dir = ''
 # AppImage文件名
-app_name = r'VNote-2.7.1-x86_64.AppImage'
+app_name = ''
 # 软链接名称=>我喜欢的名字
-link_name = r'vnote'
+link_name = ''
 
 
 # 权限rwxrwxrwx
@@ -45,15 +47,27 @@ def write_file(file, content):
 
 if __name__ == "__main__":
 
+    # 获取脚本参数
+    opts, args = getopt.getopt(sys.argv[1:], 'L:A:a:l:', ['link_dir=', 'app_dir=', 'app_name=', 'link_name='])
+    for opt, arg in opts:
+        if opt in ['-L', '--link_dir']:
+            link_dir = arg
+        elif opt in ['-A', '--app_dir']:
+            app_dir = arg
+        elif opt in ['-a', '--app_name']:
+            app_name = arg
+        elif opt in ['-l', '--link_name']:
+            link_name = arg
+
+
     # 获取当前用户
     user = getpass.getuser()
     if user == 'root':
-        link_dir_temp = input('请输入目标可执行程序路径[默认为' + link_dir + ']：')
-        if len(link_dir_temp) != 0:
-            link_dir = link_dir_temp
-        app_dir = input('请输入AppImage存放位置[必填]：')
-        app_name = input('请输入AppImage的名称[必填]：')
-        link_name = input('请输入最终要执行的命令名称[用于启动此AppImage，必填]：')
+        if len(args) != 4:
+            link_dir_temp = input('请输入目标可执行程序路径[例如/usr/local/bin]：')
+            app_dir = input('请输入AppImage存放位置[例如/home/duyanhan/soft_app]：')
+            app_name = input('请输入AppImage的名称[例如test.AppImage]：')
+            link_name = input('请输入最终要执行的命令名称[用于启动此AppImage，例如test]：')
         # 创建link_name+'.sh'的文件在app_dir路径下面
         starter_sh = os.path.join(app_dir, link_name + '.sh')
         # 写入内容
