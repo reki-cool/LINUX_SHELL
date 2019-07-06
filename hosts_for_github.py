@@ -60,13 +60,13 @@ def chmod644(host_path):
 
 if __name__ == "__main__":
 
-    # 获取当前用户
-    user = getpass.getuser()
     # 确定hosts文件路径
     if sys.platform == "linux":
         # ubuntu hosts文件位置
         host_path = r'/etc/hosts'
 
+    # 获取当前用户
+    user = getpass.getuser()
     if user == 'root':
         # 修改hosts文件权限
         # chmod777(host_path)
@@ -85,7 +85,7 @@ if __name__ == "__main__":
         # print('已经成功从HOSTS文件中删除GITHUB相关的DNS记录...')
 
         # 查看HOSTS文件中当前的DNS记录
-        show_host(host_path)
+        # show_host(host_path)
 
         # 恢复hosts文件权限
         # chmod644(host_path)
