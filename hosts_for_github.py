@@ -77,8 +77,9 @@ if __name__ == "__main__":
             write_host(HOST_GITHUB, host_path)
             print('已经成功向HOSTS文件中写入GITHUB相关的DNS记录...')
 
-        remove_host(HOST_GITHUB, host_path)
-        print('已经成功从HOSTS文件中删除GITHUB相关的DNS记录...')
+        # 如果需要移除之前添加的DNS记录，取消下面两行注释
+        # remove_host(HOST_GITHUB, host_path)
+        # print('已经成功从HOSTS文件中删除GITHUB相关的DNS记录...')
 
         # 查看HOSTS文件中当前的DNS记录
         # show_host(host_path)
