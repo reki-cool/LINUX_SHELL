@@ -25,6 +25,7 @@
     需要使用root用户执行此脚本  
     需要系统已经安装screen命令  
     本脚本使用python3执行  
+    AppImage文件需要实现事先进行可执行授权  
  - 脚本参考：  
     创建软链接参考：https://www.runoob.com/python/os-symlink.html  
     路径拼接参考：https://blog.csdn.net/qq_42034590/article/details/80031241  
